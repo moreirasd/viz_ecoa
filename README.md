@@ -96,10 +96,6 @@ print(plot_paleta)
 
 ### Exemplo 1: Heatmap (escala continua)
 
-<p align="center">
-  <img src="man/figures/exemplo_heatmap.png" width="500">
-</p>
-
 ```r
 set.seed(42)
 df_heat <- expand.grid(x = 1:20, y = 1:20)
@@ -115,11 +111,13 @@ p_heat <- ggplot(df_heat, aes(x = x, y = y, fill = z)) +
 print(p_heat)
 ```
 
-### Exemplo 2: Grafico de barras (escala discreta)
-
 <p align="center">
-  <img src="man/figures/exemplo_barras.png" width="500">
+  <img src="man/figures/exemplo_heatmap.png" width="500">
 </p>
+
+
+
+### Exemplo 2: Grafico de barras (escala discreta)
 
 ```r
 df_bar <- data.frame(
@@ -136,12 +134,12 @@ p_bar <- ggplot(df_bar, aes(x = categoria, y = valor, fill = categoria)) +
 
 print(p_bar)
 ```
+<p align="center">
+  <img src="man/figures/exemplo_barras.png" width="500">
+</p>
+
 
 ### Exemplo 3: Scatter plot (escala continua de cor)
-
-<p align="center">
-  <img src="man/figures/exemplo_scatter.png" width="500">
-</p>
 
 ```r
 set.seed(123)
@@ -159,6 +157,10 @@ p_scatter <- ggplot(df_scatter, aes(x = x, y = y, color = dist)) +
 
 print(p_scatter)
 ```
+<p align="center">
+  <img src="man/figures/exemplo_scatter.png" width="500">
+</p>
+
 
 #### Exemplo 4: Obter somente os HEX codes
 
