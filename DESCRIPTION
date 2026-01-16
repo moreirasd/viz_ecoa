@@ -1,0 +1,20 @@
+Package: vizecoa
+Type: Package
+Title: Paleta de Cores e Escalas ggplot2 para a Ecoa Consultoria
+Version: 0.1.0
+Authors@R:
+    person("Miguel", "Moreira", email = "miguel@ecoaconsultoria.com", role = c("aut", "cre"))
+Description: Fornece uma paleta de cores personalizada da Ecoa Consultoria Economica
+    e funcoes para uso com ggplot2. Inclui escalas continuas e discretas para
+    preenchimento (fill) e cor (color), baseadas nas cores institucionais da Ecoa.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+Imports:
+    ggplot2,
+    grDevices
+Suggests:
+    patchwork
+URL: https://github.com/moreirasd/viz_ecoa
+BugReports: https://github.com/moreirasd/viz_ecoa/issues
