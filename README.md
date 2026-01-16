@@ -162,7 +162,7 @@ print(p_scatter)
 </p>
 
 
-#### Exemplo 4: Obter somente os HEX codes
+#### Exemplo 4: Obter somente os HEX codes.
 
 ```r
 hex_ecoa(4)
