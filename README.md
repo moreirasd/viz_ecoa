@@ -62,6 +62,7 @@ Todas as funcoes aceitam o argumento `cinza = TRUE` para usar a variacao com ton
 | `scale_color_ecoa()` | Escala de cor continua para ggplot2 |
 | `scale_fill_ecoa_d()` | Escala de preenchimento discreta para ggplot2 |
 | `scale_color_ecoa_d()` | Escala de cor discreta para ggplot2 |
+| `theme_ecoa()` | Tema padrao dos graficos Ecoa (ver [Guia de Uso](GUIA_DE_USO.md)) |
 | `mostrar_paleta(n)` | Visualiza n cores da paleta com codigos hex |
 | `hex_ecoa(n)` | Retorna os codigos hex de n cores (util para PPT) |
 

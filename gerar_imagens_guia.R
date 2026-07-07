@@ -8,45 +8,12 @@ library(forcats)
 library(ggrepel)
 library(scales)
 
-# Carregar as funcoes do pacote
+# Carregar as funcoes do pacote (inclui theme_ecoa)
 source("R/paletas.R")
+source("R/theme_ecoa.R")
 
 if (!dir.exists("man/figures/guia")) {
   dir.create("man/figures/guia", recursive = TRUE)
-}
-
-# Tema padrao Ecoa ---------------------------------------------------------
-
-theme_ecoa <- function(base_size = 12,
-                       y_limits  = NULL,
-                       y_breaks  = waiver(),
-                       y_labels  = scales::label_number(big.mark = ".", decimal.mark = ","),
-                       y_expand  = expansion(mult = c(0, 0))) {
-  list(
-    theme_classic(base_size = base_size) %+replace%
-      theme(
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank(),
-        panel.grid.major.y = element_line(color = "gray85", linewidth = 0.75),
-        panel.grid.minor.y = element_blank(),
-        axis.line.y        = element_blank(),
-        axis.ticks.y       = element_blank(),
-        axis.line.x        = element_line(linetype = "solid", linewidth = 0.9),
-        axis.ticks         = element_line(),
-        axis.text.x        = element_text(face = "bold"),
-        legend.title       = element_blank(),
-        legend.position    = "bottom",
-        plot.title         = element_text(face = "bold", size = base_size + 2, hjust = 0),
-        plot.subtitle      = element_text(hjust = 0),
-        plot.caption       = element_text(hjust = 0, colour = "grey40", size = base_size - 3)
-      ),
-    scale_y_continuous(
-      limits = y_limits,
-      breaks = y_breaks,
-      labels = y_labels,
-      expand = y_expand
-    )
-  )
 }
 
 # Helper de formatacao pt-BR

@@ -19,6 +19,7 @@ Consultoria Economica e funcoes para integracao com ggplot2.
   \item{\code{\link{scale_color_ecoa}}}{Escala de cor continua}
   \item{\code{\link{scale_fill_ecoa_d}}}{Escala de preenchimento discreta}
   \item{\code{\link{scale_color_ecoa_d}}}{Escala de cor discreta}
+  \item{\code{\link{theme_ecoa}}}{Tema padrao dos graficos Ecoa}
   \item{\code{\link{mostrar_paleta}}}{Visualizar a paleta}
   \item{\code{\link{hex_ecoa}}}{Obter codigos hex}
 }

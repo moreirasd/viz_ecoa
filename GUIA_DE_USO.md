@@ -48,7 +48,7 @@ library(patchwork) # composição de múltiplos gráficos (opcional)
 
 ## 3. O tema padrão: `theme_ecoa()`
 
-Copie esta função para o início do seu script. Ela reúne o tema e a escala Y padrão (começando do zero, números pt-BR):
+A função `theme_ecoa()` **já vem exportada no pacote** — basta `library(vizecoa)`. Ela reúne o tema e a escala Y padrão (começando do zero, números pt-BR). Para referência, esta é a definição:
 
 ```r
 theme_ecoa <- function(base_size = 12,
