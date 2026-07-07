@@ -183,7 +183,7 @@ mostrar_paleta <- function(n) {
     ggplot2::theme_void() +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5, size = 11),
                    plot.margin = ggplot2::margin(5, 10, 5, 10),
-                   text = element_text(face = "bold", size = 15)) +
+                   text = ggplot2::element_text(face = "bold", size = 15)) +
     ggplot2::labs(title = paste0(n, " cores"))
 }
 
