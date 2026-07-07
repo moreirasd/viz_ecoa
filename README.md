@@ -6,6 +6,8 @@ Paleta de cores e escalas ggplot2 para a **Ecoa Consultoria Economica**.
 
 O pacote `vizecoa` fornece uma paleta de cores personalizada baseada nas cores institucionais da Ecoa, com funcoes prontas para uso em graficos `ggplot2`. O objetivo e padronizar as visualizacoes de dados em projetos da consultoria.
 
+> **Novo:** consulte o [**Guia de Uso**](GUIA_DE_USO.md) para o padrao completo de graficos Ecoa — tema padrao (`theme_ecoa`), formatacao de numeros pt-BR, convencoes de cores e exemplos prontos (linhas com rotulos, barras, anotacoes).
+
 ## Instalacao
 
 ### Via GitHub (recomendado)

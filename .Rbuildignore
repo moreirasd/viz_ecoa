@@ -5,4 +5,6 @@
 ^\.github$
 ^cores_ecoa\.R$
 ^gerar_imagens\.R$
+^gerar_imagens_guia\.R$
+^GUIA_DE_USO\.md$
 ^man/figures$
