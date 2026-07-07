@@ -4,20 +4,27 @@
 \alias{paleta_ecoa}
 \title{Funcao de paleta continua Ecoa}
 \usage{
-paleta_ecoa(n)
+paleta_ecoa(n, cinza = FALSE)
 }
 \arguments{
 \item{n}{Numero de cores a serem geradas na paleta.}
+
+\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
 }
 \value{
 Um vetor de caracteres com codigos hexadecimais das cores.
 }
 \description{
-Gera uma funcao que interpola as cores da Ecoa para criar gradientes.
+Gera n cores interpoladas a partir das cores da Ecoa. Com \code{cinza = TRUE},
+usa a variacao \code{\link{cores_ecoa_cinza}}, que inclui tons de cinza na
+transicao entre o roxo e o laranja -- util para graficos com mais categorias.
 }
 \examples{
 # Gerar 10 cores
 paleta_ecoa(10)
+
+# Versao com cinzas, para mais categorias
+paleta_ecoa(10, cinza = TRUE)
 
 # Usar em um grafico base
 barplot(1:8, col = paleta_ecoa(8))

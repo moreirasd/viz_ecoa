@@ -6,6 +6,7 @@
 #' @section Funcoes principais:
 #' \describe{
 #'   \item{\code{\link{cores_ecoa}}}{Vetor com as 4 cores base da Ecoa}
+#'   \item{\code{\link{cores_ecoa_cinza}}}{Variacao com tons de cinza, para mais categorias}
 #'   \item{\code{\link{paleta_ecoa}}}{Funcao para gerar paletas continuas}
 #'   \item{\code{\link{scale_fill_ecoa}}}{Escala de preenchimento continua}
 #'   \item{\code{\link{scale_color_ecoa}}}{Escala de cor continua}

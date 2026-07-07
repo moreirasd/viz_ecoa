@@ -30,11 +30,31 @@ A paleta Ecoa e composta por 4 cores base que sao interpoladas para criar gradie
 | <img src="https://readme-swatches.vercel.app/f2aa84" width="40" height="20"> | `#f2aa84` | Pessego |
 | <img src="https://readme-swatches.vercel.app/FF8C00" width="40" height="20"> | `#FF8C00` | Laranja |
 
+### Variacao com tons de cinza
+
+Para graficos com muitas categorias, ha uma variacao da paleta com tons de cinza na transicao entre o roxo e o laranja. Os cinzas desaturam o meio da paleta, tornando as cores intermediarias mais distinguiveis entre si. Basta usar `cinza = TRUE` em qualquer funcao do pacote.
+
+| Cor | Hex | Descricao |
+|:---:|:---:|-----------|
+| <img src="https://readme-swatches.vercel.app/4a3549" width="40" height="20"> | `#4a3549` | Roxo escuro |
+| <img src="https://readme-swatches.vercel.app/aa6aef" width="40" height="20"> | `#aa6aef` | Roxo claro |
+| <img src="https://readme-swatches.vercel.app/948b9c" width="40" height="20"> | `#948b9c` | Cinza arroxeado |
+| <img src="https://readme-swatches.vercel.app/cfc9c6" width="40" height="20"> | `#cfc9c6` | Cinza claro |
+| <img src="https://readme-swatches.vercel.app/f2aa84" width="40" height="20"> | `#f2aa84` | Pessego |
+| <img src="https://readme-swatches.vercel.app/FF8C00" width="40" height="20"> | `#FF8C00` | Laranja |
+
+<p align="center">
+  <img src="man/figures/paleta_cinza.png" width="600">
+</p>
+
 ## Funcoes Disponiveis
+
+Todas as funcoes aceitam o argumento `cinza = TRUE` para usar a variacao com tons de cinza (padrao: `FALSE`).
 
 | Funcao | Descricao |
 |--------|-----------|
 | `cores_ecoa` | Vetor com as 4 cores base da Ecoa |
+| `cores_ecoa_cinza` | Vetor com as 6 cores da variacao com cinza |
 | `paleta_ecoa(n)` | Gera n cores interpoladas da paleta |
 | `scale_fill_ecoa()` | Escala de preenchimento continua para ggplot2 |
 | `scale_color_ecoa()` | Escala de cor continua para ggplot2 |
@@ -139,7 +159,31 @@ print(p_bar)
 </p>
 
 
-### Exemplo 3: Scatter plot (escala continua de cor)
+### Exemplo 3: Muitas categorias (paleta com cinza)
+
+Quando ha muitas categorias, use `cinza = TRUE` para obter cores intermediarias mais distinguiveis:
+
+```r
+df_bar8 <- data.frame(
+  categoria = LETTERS[1:8],
+  valor = c(23, 45, 67, 34, 89, 56, 71, 48)
+)
+
+p_bar_cinza <- ggplot(df_bar8, aes(x = categoria, y = valor, fill = categoria)) +
+  geom_col() +
+  scale_fill_ecoa_d(cinza = TRUE) +
+  theme_minimal() +
+  labs(title = "Exemplo: Barras com 8 categorias") +
+  theme(legend.position = "none")
+
+print(p_bar_cinza)
+```
+<p align="center">
+  <img src="man/figures/exemplo_barras_cinza.png" width="500">
+</p>
+
+
+### Exemplo 4: Scatter plot (escala continua de cor)
 
 ```r
 set.seed(123)
@@ -162,7 +206,7 @@ print(p_scatter)
 </p>
 
 
-#### Exemplo 4: Obter somente os HEX codes.
+#### Exemplo 5: Obter somente os HEX codes.
 
 ```r
 hex_ecoa(4)
@@ -174,8 +218,9 @@ hex_ecoa(5)
 hex_ecoa(6)
 #> 6 cores: ...
 
-hex_ecoa(8)
-#> 8 cores: ...
+# Paleta com tons de cinza
+hex_ecoa(8, cinza = TRUE)
+#> 8 cores: #4A3549, #8E5ABF, #A078CB, #9C93A2, #C6C0C0, #E2B7A0, #F5A15E, #FF8C00
 
 hex_ecoa(10)
 #> 10 cores: ...

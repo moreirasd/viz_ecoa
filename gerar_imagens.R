@@ -39,6 +39,47 @@ plot_paleta <- p1 / p2 / p3 / p4 +
 ggsave("man/figures/paleta_completa.png", plot_paleta, width = 8, height = 8, dpi = 150, bg = "white")
 cat("Imagem salva: man/figures/paleta_completa.png\n")
 
+# 3b. Paleta com tons de cinza
+df_continua_cinza <- data.frame(x = 1:256, y = 1)
+
+p1c <- ggplot(df_continua_cinza, aes(x = x, y = y, fill = x)) +
+ geom_tile() +
+ scale_fill_gradientn(colors = paleta_ecoa(256, cinza = TRUE)) +
+ theme_void() +
+ theme(legend.position = "none",
+       plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+       plot.margin = margin(10, 10, 10, 10)) +
+ labs(title = "Paleta Continua (com cinza)")
+
+p2c <- mostrar_paleta(6, cinza = TRUE)
+p3c <- mostrar_paleta(8, cinza = TRUE)
+p4c <- mostrar_paleta(10, cinza = TRUE)
+
+plot_paleta_cinza <- p1c / p2c / p3c / p4c +
+ plot_annotation(
+   title = "Paleta com Tons de Cinza - Ecoa",
+   theme = theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
+ )
+
+ggsave("man/figures/paleta_cinza.png", plot_paleta_cinza, width = 8, height = 8, dpi = 150, bg = "white")
+cat("Imagem salva: man/figures/paleta_cinza.png\n")
+
+# 3c. Exemplo barras com muitas categorias (paleta com cinza)
+df_bar_cinza <- data.frame(
+ categoria = LETTERS[1:8],
+ valor = c(23, 45, 67, 34, 89, 56, 71, 48)
+)
+
+p_bar_cinza <- ggplot(df_bar_cinza, aes(x = categoria, y = valor, fill = categoria)) +
+ geom_col() +
+ scale_fill_ecoa_d(cinza = TRUE) +
+ theme_minimal() +
+ labs(title = "Exemplo: Barras com 8 categorias (cinza = TRUE)") +
+ theme(legend.position = "none")
+
+ggsave("man/figures/exemplo_barras_cinza.png", p_bar_cinza, width = 6, height = 4, dpi = 150, bg = "white")
+cat("Imagem salva: man/figures/exemplo_barras_cinza.png\n")
+
 # 4. Exemplo Heatmap
 set.seed(42)
 df_heat <- expand.grid(x = 1:20, y = 1:20)

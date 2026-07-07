@@ -4,9 +4,12 @@
 \alias{scale_fill_ecoa_d}
 \title{Escala de preenchimento discreta Ecoa para ggplot2}
 \usage{
-scale_fill_ecoa_d(...)
+scale_fill_ecoa_d(cinza = FALSE, ...)
 }
 \arguments{
+\item{cinza}{Se TRUE, usa a paleta com tons de cinza -- recomendado para
+graficos com muitas categorias (padrao: FALSE).}
+
 \item{...}{Argumentos adicionais passados para
 \code{\link[ggplot2]{discrete_scale}}.}
 }
@@ -29,5 +32,10 @@ df <- data.frame(
 ggplot(df, aes(x = categoria, y = valor, fill = categoria)) +
   geom_col() +
   scale_fill_ecoa_d()
+
+# Com tons de cinza, para mais categorias
+ggplot(df, aes(x = categoria, y = valor, fill = categoria)) +
+  geom_col() +
+  scale_fill_ecoa_d(cinza = TRUE)
 
 }

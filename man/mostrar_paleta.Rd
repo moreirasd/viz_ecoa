@@ -4,10 +4,12 @@
 \alias{mostrar_paleta}
 \title{Visualizar paleta discreta}
 \usage{
-mostrar_paleta(n)
+mostrar_paleta(n, cinza = FALSE)
 }
 \arguments{
 \item{n}{Numero de cores a serem exibidas.}
+
+\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
 }
 \value{
 Um objeto ggplot.
@@ -19,7 +21,7 @@ Cria um grafico mostrando n cores da paleta Ecoa com seus codigos hex.
 # Mostrar 4 cores
 mostrar_paleta(4)
 
-# Mostrar 8 cores
-mostrar_paleta(8)
+# Mostrar 8 cores com tons de cinza
+mostrar_paleta(8, cinza = TRUE)
 
 }

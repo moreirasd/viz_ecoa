@@ -4,10 +4,12 @@
 \alias{scale_fill_ecoa}
 \title{Escala de preenchimento continua Ecoa para ggplot2}
 \usage{
-scale_fill_ecoa(n = 256, ...)
+scale_fill_ecoa(n = 256, cinza = FALSE, ...)
 }
 \arguments{
 \item{n}{Numero de cores para o gradiente (padrao: 256).}
+
+\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
 
 \item{...}{Argumentos adicionais passados para
 \code{\link[ggplot2]{scale_fill_gradientn}}.}
