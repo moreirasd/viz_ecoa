@@ -19,8 +19,10 @@ Um vetor de caracteres com codigos hexadecimais das cores.
 }
 \description{
 Gera n cores de uma das paletas Ecoa (veja \code{\link{paletas_ecoa}}).
-Paletas do tipo qualitativa (\code{"completa"}) retornam as cores exatas
-enquanto \code{n} nao excede o total disponivel; as demais sao interpoladas
+Paletas do tipo qualitativa (\code{"completa"}) retornam cores exatas,
+selecionadas em posicoes igualmente espacadas ao longo do espectro da
+paleta (garantindo bom contraste mesmo com poucas categorias), enquanto
+\code{n} nao excede o total disponivel; as demais paletas sao interpoladas
 por \code{colorRampPalette}.
 }
 \examples{

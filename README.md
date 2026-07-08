@@ -61,7 +61,7 @@ Alem da paleta padrao, o pacote traz um conjunto de paletas nomeadas, no estilo 
 |--------|------|:-----:|--------------|
 | `ecoa` | principal | 4 | Padrao: roxos e laranjas |
 | `cinza` | principal | 6 | Padrao com cinzas na transicao, para mais categorias |
-| `completa` | qualitativa | 10 | Muitas categorias: roxos, laranjas, azuis e lilas do tema institucional |
+| `completa` | qualitativa | 10 | Muitas categorias: espectro continuo (frios -> quentes) com roxos, azuis, lilas e laranjas do tema institucional |
 | `roxos` | sequencial | 5 | Dados ordenados/continuos em tons de roxo |
 | `lilas` | sequencial | 5 | Dados ordenados/continuos em tons de lilas/magenta |
 | `azuis` | sequencial | 5 | Dados ordenados/continuos em tons de azul |
@@ -83,7 +83,7 @@ scale_color_ecoa(paleta = "divergente")  # desvios em torno de um centro
 hex_ecoa(6, paleta = "laranjas")         # hex codes para PPT/Excel
 ```
 
-As paletas qualitativas (`completa`) retornam cores exatas ate o limite; as demais sao interpoladas para qualquer `n`.
+As paletas qualitativas (`completa`) retornam cores exatas ate o limite, selecionadas em posicoes igualmente espacadas ao longo do espectro — com poucas categorias as cores continuam bem contrastadas, e com muitas a sequencia mantem transicao suave. As demais paletas sao interpoladas para qualquer `n`.
 
 ## Funcoes Disponiveis
 

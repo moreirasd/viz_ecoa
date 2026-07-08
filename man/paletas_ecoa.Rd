@@ -8,8 +8,9 @@ Uma lista nomeada de vetores de codigos hexadecimais:
 \describe{
   \item{ecoa}{Paleta padrao: roxos e laranjas (4 cores)}
   \item{cinza}{Padrao com tons de cinza na transicao (6 cores)}
-  \item{completa}{Qualitativa com roxos, laranjas, azuis e lilas do tema
-    institucional -- para graficos com muitas categorias (10 cores)}
+  \item{completa}{Qualitativa com roxos, azuis, lilas e laranjas do tema
+    institucional, ordenada como espectro continuo (frios -> quentes) --
+    para graficos com muitas categorias (10 cores)}
   \item{roxos}{Sequencial de tons de roxo, do escuro ao claro (5 cores)}
   \item{lilas}{Sequencial de tons de lilas/magenta (5 cores)}
   \item{azuis}{Sequencial de tons de azul (5 cores)}

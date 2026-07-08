@@ -63,8 +63,9 @@ cores_ecoa_cinza <- c(
 #' \describe{
 #'   \item{ecoa}{Paleta padrao: roxos e laranjas (4 cores)}
 #'   \item{cinza}{Padrao com tons de cinza na transicao (6 cores)}
-#'   \item{completa}{Qualitativa com roxos, laranjas, azuis e lilas do tema
-#'     institucional -- para graficos com muitas categorias (10 cores)}
+#'   \item{completa}{Qualitativa com roxos, azuis, lilas e laranjas do tema
+#'     institucional, ordenada como espectro continuo (frios -> quentes) --
+#'     para graficos com muitas categorias (10 cores)}
 #'   \item{roxos}{Sequencial de tons de roxo, do escuro ao claro (5 cores)}
 #'   \item{lilas}{Sequencial de tons de lilas/magenta (5 cores)}
 #'   \item{azuis}{Sequencial de tons de azul (5 cores)}
@@ -82,8 +83,8 @@ cores_ecoa_cinza <- c(
 paletas_ecoa <- list(
   ecoa       = c("#4A3549", "#AA6AEF", "#F2AA84", "#FF8C00"),
   cinza      = c("#4A3549", "#AA6AEF", "#948B9C", "#CFC9C6", "#F2AA84", "#FF8C00"),
-  completa   = c("#4A3549", "#FF8C00", "#AA6AEF", "#F2AA84", "#435570",
-                 "#A02B93", "#FFB25B", "#7779B7", "#BE6611", "#B580D1"),
+  completa   = c("#4A3549", "#435570", "#7779B7", "#AA6AEF", "#B580D1",
+                 "#A02B93", "#BE6611", "#FF8C00", "#FFB25B", "#F2AA84"),
   roxos      = c("#3A2A44", "#6A4590", "#AA6AEF", "#C9A2F2", "#E8DAF9"),
   lilas      = c("#5C1B55", "#A02B93", "#B580D1", "#D9B3E8", "#F2E4F9"),
   azuis      = c("#2C3A50", "#435570", "#7779B7", "#A9ABD1", "#D8D9EC"),
@@ -127,8 +128,10 @@ paletas_ecoa_info <- data.frame(
 #' Funcao de paleta Ecoa
 #'
 #' Gera n cores de uma das paletas Ecoa (veja \code{\link{paletas_ecoa}}).
-#' Paletas do tipo qualitativa (\code{"completa"}) retornam as cores exatas
-#' enquanto \code{n} nao excede o total disponivel; as demais sao interpoladas
+#' Paletas do tipo qualitativa (\code{"completa"}) retornam cores exatas,
+#' selecionadas em posicoes igualmente espacadas ao longo do espectro da
+#' paleta (garantindo bom contraste mesmo com poucas categorias), enquanto
+#' \code{n} nao excede o total disponivel; as demais paletas sao interpoladas
 #' por \code{colorRampPalette}.
 #'
 #' @param n Numero de cores a serem geradas.
@@ -157,7 +160,7 @@ paleta_ecoa <- function(n, paleta = "ecoa", cinza = FALSE) {
   cores  <- paletas_ecoa[[paleta]]
   tipo   <- paletas_ecoa_info$tipo[paletas_ecoa_info$paleta == paleta]
   if (tipo == "qualitativa" && n <= length(cores)) {
-    return(cores[seq_len(n)])
+    return(cores[round(seq(1, length(cores), length.out = n))])
   }
   grDevices::colorRampPalette(cores)(n)
 }
