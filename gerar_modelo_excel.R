@@ -126,7 +126,9 @@ cores_linha <- c(
 graf_linha <- ms_linechart(df_linha, x = "ano", y = "valor", group = "segmento") |>
   chart_data_stroke(values = cores_linha) |>
   chart_data_fill(values = cores_linha) |>
-  chart_ax_y(limit_min = 0, num_fmt = "#,##0") |>
+  chart_data_symbol(values = "none") |>
+  chart_ax_x(major_tick_mark = "out") |>
+  chart_ax_y(limit_min = 0, num_fmt = "#,##0", major_tick_mark = "none") |>
   chart_labels(title = "Vinculos formais por segmento", xlab = NULL, ylab = "N de Vinculos") |>
   set_theme(tema_excel)
 
@@ -149,7 +151,8 @@ graf_col <- ms_barchart(df_col, x = "ano", y = "deficit") |>
   chart_data_stroke(values = roxo_escuro) |>
   chart_data_labels(position = "outEnd", num_fmt = "#,##0", show_val = TRUE) |>
   chart_labels_text(fonte_rotulo) |>
-  chart_ax_y(limit_min = 0, num_fmt = "#,##0") |>
+  chart_ax_x(major_tick_mark = "out") |>
+  chart_ax_y(limit_min = 0, num_fmt = "#,##0", major_tick_mark = "none") |>
   chart_labels(title = "Deficit acumulado de formacao", xlab = NULL, ylab = "Profissionais") |>
   set_theme(tema_excel)
 
@@ -176,7 +179,8 @@ graf_barh <- ms_barchart(df_barh, x = "setor", y = "vinculos", group = "tipo") |
   chart_data_stroke(values = c("Setor de Dados" = roxo_escuro, "Outros Setores" = laranja)) |>
   chart_data_labels(position = "outEnd", num_fmt = "#,##0", show_val = TRUE) |>
   chart_labels_text(fonte_rotulo) |>
-  chart_ax_y(limit_min = 0, num_fmt = "#,##0") |>
+  chart_ax_x(major_tick_mark = "out") |>
+  chart_ax_y(limit_min = 0, num_fmt = "#,##0", major_tick_mark = "none") |>
   chart_labels(title = "Demanda por profissionais de dados por setor",
                xlab = NULL, ylab = "Numero de Vinculos") |>
   set_theme(tema_excel) |>
@@ -205,7 +209,8 @@ graf_grp <- ms_barchart(df_grp, x = "ano", y = "lacuna", group = "nivel") |>
   chart_settings(dir = "vertical", grouping = "clustered", gap_width = 60, overlap = -10) |>
   chart_data_fill(values = c("Superior" = roxo_escuro, "Tecnico" = laranja)) |>
   chart_data_stroke(values = c("Superior" = roxo_escuro, "Tecnico" = laranja)) |>
-  chart_ax_y(limit_min = 0, num_fmt = "#,##0") |>
+  chart_ax_x(major_tick_mark = "out") |>
+  chart_ax_y(limit_min = 0, num_fmt = "#,##0", major_tick_mark = "none") |>
   chart_labels(title = "Lacuna anual (demanda - oferta) por nivel de formacao",
                xlab = NULL, ylab = "Profissionais/ano") |>
   set_theme(tema_excel)
