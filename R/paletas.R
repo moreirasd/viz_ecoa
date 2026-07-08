@@ -52,30 +52,113 @@ cores_ecoa_cinza <- c(
   "#FF8C00"    # laranja
 )
 
-#' Funcao de paleta continua Ecoa
+#' Conjunto de paletas Ecoa
 #'
-#' Gera n cores interpoladas a partir das cores da Ecoa. Com \code{cinza = TRUE},
-#' usa a variacao \code{\link{cores_ecoa_cinza}}, que inclui tons de cinza na
-#' transicao entre o roxo e o laranja -- util para graficos com mais categorias.
+#' Lista nomeada com todas as paletas de cores da Ecoa, no estilo do pacote
+#' RColorBrewer. Consulte \code{\link{paletas_ecoa_info}} para o tipo e o
+#' numero de cores de cada paleta, e \code{\link{mostrar_paletas}} para
+#' visualizar todas.
 #'
-#' @param n Numero de cores a serem geradas na paleta.
-#' @param cinza Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).
+#' @format Uma lista nomeada de vetores de codigos hexadecimais:
+#' \describe{
+#'   \item{ecoa}{Paleta padrao: roxos e laranjas (4 cores)}
+#'   \item{cinza}{Padrao com tons de cinza na transicao (6 cores)}
+#'   \item{completa}{Qualitativa com roxos, laranjas, azuis e lilas do tema
+#'     institucional -- para graficos com muitas categorias (10 cores)}
+#'   \item{roxos}{Sequencial de tons de roxo, do escuro ao claro (5 cores)}
+#'   \item{lilas}{Sequencial de tons de lilas/magenta (5 cores)}
+#'   \item{azuis}{Sequencial de tons de azul (5 cores)}
+#'   \item{laranjas}{Sequencial de tons de laranja (5 cores)}
+#'   \item{frios}{Tons frios: azuis a lilas -- convencao para oferta/total (4 cores)}
+#'   \item{quentes}{Tons quentes: laranjas a pessego -- convencao para demanda/destaque (4 cores)}
+#'   \item{divergente}{Divergente: roxo, neutro claro e laranja (5 cores)}
+#' }
+#'
+#' @examples
+#' names(paletas_ecoa)
+#' paletas_ecoa$roxos
+#'
+#' @export
+paletas_ecoa <- list(
+  ecoa       = c("#4A3549", "#AA6AEF", "#F2AA84", "#FF8C00"),
+  cinza      = c("#4A3549", "#AA6AEF", "#948B9C", "#CFC9C6", "#F2AA84", "#FF8C00"),
+  completa   = c("#4A3549", "#FF8C00", "#AA6AEF", "#F2AA84", "#435570",
+                 "#A02B93", "#FFB25B", "#7779B7", "#BE6611", "#B580D1"),
+  roxos      = c("#3A2A44", "#6A4590", "#AA6AEF", "#C9A2F2", "#E8DAF9"),
+  lilas      = c("#5C1B55", "#A02B93", "#B580D1", "#D9B3E8", "#F2E4F9"),
+  azuis      = c("#2C3A50", "#435570", "#7779B7", "#A9ABD1", "#D8D9EC"),
+  laranjas   = c("#8A4A0C", "#BE6611", "#FF8C00", "#FFB25B", "#FFD9AC"),
+  frios      = c("#435570", "#7779B7", "#AA6AEF", "#B580D1"),
+  quentes    = c("#BE6611", "#FF8C00", "#FFB25B", "#F2AA84"),
+  divergente = c("#4A3549", "#AA6AEF", "#F2F0EE", "#FFB25B", "#BE6611")
+)
+
+#' Informacoes sobre as paletas Ecoa
+#'
+#' Data frame com o tipo e o numero de cores de cada paleta de
+#' \code{\link{paletas_ecoa}}, no estilo de \code{RColorBrewer::brewer.pal.info}.
+#'
+#' Tipos:
+#' \itemize{
+#'   \item \strong{principal}: paletas multiuso, interpoladas;
+#'   \item \strong{qualitativa}: cores exatas para categorias (interpola so
+#'     alem do maximo);
+#'   \item \strong{sequencial}: gradiente do escuro ao claro, para dados ordenados;
+#'   \item \strong{divergente}: dois extremos com neutro no centro, para
+#'     desvios em torno de um valor central.
+#' }
+#'
+#' @format Um data frame com as colunas \code{paleta}, \code{tipo} e
+#'   \code{n_cores}.
+#'
+#' @examples
+#' paletas_ecoa_info
+#'
+#' @export
+paletas_ecoa_info <- data.frame(
+  paleta  = names(paletas_ecoa),
+  tipo    = c("principal", "principal", "qualitativa",
+              "sequencial", "sequencial", "sequencial", "sequencial",
+              "sequencial", "sequencial", "divergente"),
+  n_cores = lengths(paletas_ecoa),
+  row.names = NULL
+)
+
+#' Funcao de paleta Ecoa
+#'
+#' Gera n cores de uma das paletas Ecoa (veja \code{\link{paletas_ecoa}}).
+#' Paletas do tipo qualitativa (\code{"completa"}) retornam as cores exatas
+#' enquanto \code{n} nao excede o total disponivel; as demais sao interpoladas
+#' por \code{colorRampPalette}.
+#'
+#' @param n Numero de cores a serem geradas.
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}). Veja
+#'   \code{names(paletas_ecoa)}.
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #'
 #' @return Um vetor de caracteres com codigos hexadecimais das cores.
 #'
 #' @examples
-#' # Gerar 10 cores
+#' # Paleta padrao
 #' paleta_ecoa(10)
 #'
-#' # Versao com cinzas, para mais categorias
-#' paleta_ecoa(10, cinza = TRUE)
+#' # Outras paletas
+#' paleta_ecoa(8, paleta = "completa")
+#' paleta_ecoa(4, paleta = "roxos")
+#' paleta_ecoa(5, paleta = "azuis")
 #'
 #' # Usar em um grafico base
-#' barplot(1:8, col = paleta_ecoa(8))
+#' barplot(1:8, col = paleta_ecoa(8, paleta = "laranjas"))
 #'
 #' @export
-paleta_ecoa <- function(n, cinza = FALSE) {
-  cores <- if (cinza) cores_ecoa_cinza else cores_ecoa
+paleta_ecoa <- function(n, paleta = "ecoa", cinza = FALSE) {
+  if (cinza) paleta <- "cinza"
+  paleta <- match.arg(paleta, names(paletas_ecoa))
+  cores  <- paletas_ecoa[[paleta]]
+  tipo   <- paletas_ecoa_info$tipo[paletas_ecoa_info$paleta == paleta]
+  if (tipo == "qualitativa" && n <= length(cores)) {
+    return(cores[seq_len(n)])
+  }
   grDevices::colorRampPalette(cores)(n)
 }
 
@@ -85,7 +168,10 @@ paleta_ecoa <- function(n, cinza = FALSE) {
 #' em graficos ggplot2.
 #'
 #' @param n Numero de cores para o gradiente (padrao: 256).
-#' @param cinza Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}). Para escalas
+#'   continuas, as sequenciais (\code{"roxos"}, \code{"azuis"}, ...) e a
+#'   \code{"divergente"} sao as mais indicadas.
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #' @param ... Argumentos adicionais passados para
 #'   \code{\link[ggplot2]{scale_fill_gradientn}}.
 #'
@@ -102,9 +188,14 @@ paleta_ecoa <- function(n, cinza = FALSE) {
 #'   geom_tile() +
 #'   scale_fill_ecoa()
 #'
+#' # Com uma paleta sequencial
+#' ggplot(df, aes(x = x, y = y, fill = z)) +
+#'   geom_tile() +
+#'   scale_fill_ecoa(paleta = "roxos")
+#'
 #' @export
-scale_fill_ecoa <- function(n = 256, cinza = FALSE, ...) {
-  ggplot2::scale_fill_gradientn(colors = paleta_ecoa(n, cinza = cinza), ...)
+scale_fill_ecoa <- function(n = 256, paleta = "ecoa", cinza = FALSE, ...) {
+  ggplot2::scale_fill_gradientn(colors = paleta_ecoa(n, paleta = paleta, cinza = cinza), ...)
 }
 
 #' Escala de cor continua Ecoa para ggplot2
@@ -113,7 +204,10 @@ scale_fill_ecoa <- function(n = 256, cinza = FALSE, ...) {
 #' em graficos ggplot2.
 #'
 #' @param n Numero de cores para o gradiente (padrao: 256).
-#' @param cinza Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}). Para escalas
+#'   continuas, as sequenciais (\code{"roxos"}, \code{"azuis"}, ...) e a
+#'   \code{"divergente"} sao as mais indicadas.
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #' @param ... Argumentos adicionais passados para
 #'   \code{\link[ggplot2]{scale_color_gradientn}}.
 #'
@@ -131,8 +225,8 @@ scale_fill_ecoa <- function(n = 256, cinza = FALSE, ...) {
 #'   scale_color_ecoa()
 #'
 #' @export
-scale_color_ecoa <- function(n = 256, cinza = FALSE, ...) {
-  ggplot2::scale_color_gradientn(colors = paleta_ecoa(n, cinza = cinza), ...)
+scale_color_ecoa <- function(n = 256, paleta = "ecoa", cinza = FALSE, ...) {
+  ggplot2::scale_color_gradientn(colors = paleta_ecoa(n, paleta = paleta, cinza = cinza), ...)
 }
 
 #' Escala de preenchimento discreta Ecoa para ggplot2
@@ -140,8 +234,9 @@ scale_color_ecoa <- function(n = 256, cinza = FALSE, ...) {
 #' Aplica a paleta de cores Ecoa como escala de preenchimento discreta
 #' em graficos ggplot2.
 #'
-#' @param cinza Se TRUE, usa a paleta com tons de cinza -- recomendado para
-#'   graficos com muitas categorias (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}). Para muitas
+#'   categorias, use \code{"completa"} ou \code{"cinza"}.
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #' @param ... Argumentos adicionais passados para
 #'   \code{\link[ggplot2]{discrete_scale}}.
 #'
@@ -160,15 +255,15 @@ scale_color_ecoa <- function(n = 256, cinza = FALSE, ...) {
 #'   geom_col() +
 #'   scale_fill_ecoa_d()
 #'
-#' # Com tons de cinza, para mais categorias
+#' # Para muitas categorias: paleta qualitativa completa
 #' ggplot(df, aes(x = categoria, y = valor, fill = categoria)) +
 #'   geom_col() +
-#'   scale_fill_ecoa_d(cinza = TRUE)
+#'   scale_fill_ecoa_d(paleta = "completa")
 #'
 #' @export
-scale_fill_ecoa_d <- function(cinza = FALSE, ...) {
+scale_fill_ecoa_d <- function(paleta = "ecoa", cinza = FALSE, ...) {
   ggplot2::discrete_scale("fill",
-                          palette = function(n) paleta_ecoa(n, cinza = cinza), ...)
+                          palette = function(n) paleta_ecoa(n, paleta = paleta, cinza = cinza), ...)
 }
 
 #' Escala de cor discreta Ecoa para ggplot2
@@ -176,8 +271,9 @@ scale_fill_ecoa_d <- function(cinza = FALSE, ...) {
 #' Aplica a paleta de cores Ecoa como escala de cor discreta
 #' em graficos ggplot2.
 #'
-#' @param cinza Se TRUE, usa a paleta com tons de cinza -- recomendado para
-#'   graficos com muitas categorias (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}). Para muitas
+#'   categorias, use \code{"completa"} ou \code{"cinza"}.
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #' @param ... Argumentos adicionais passados para
 #'   \code{\link[ggplot2]{discrete_scale}}.
 #'
@@ -198,9 +294,9 @@ scale_fill_ecoa_d <- function(cinza = FALSE, ...) {
 #'   scale_color_ecoa_d()
 #'
 #' @export
-scale_color_ecoa_d <- function(cinza = FALSE, ...) {
+scale_color_ecoa_d <- function(paleta = "ecoa", cinza = FALSE, ...) {
   ggplot2::discrete_scale("colour",
-                          palette = function(n) paleta_ecoa(n, cinza = cinza), ...)
+                          palette = function(n) paleta_ecoa(n, paleta = paleta, cinza = cinza), ...)
 }
 
 #' Visualizar paleta discreta
@@ -208,20 +304,21 @@ scale_color_ecoa_d <- function(cinza = FALSE, ...) {
 #' Cria um grafico mostrando n cores da paleta Ecoa com seus codigos hex.
 #'
 #' @param n Numero de cores a serem exibidas.
-#' @param cinza Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}).
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #'
 #' @return Um objeto ggplot.
 #'
 #' @examples
-#' # Mostrar 4 cores
+#' # Mostrar 4 cores da paleta padrao
 #' mostrar_paleta(4)
 #'
-#' # Mostrar 8 cores com tons de cinza
-#' mostrar_paleta(8, cinza = TRUE)
+#' # Mostrar 8 cores da paleta completa
+#' mostrar_paleta(8, paleta = "completa")
 #'
 #' @export
-mostrar_paleta <- function(n, cinza = FALSE) {
-  cores <- paleta_ecoa(n, cinza = cinza)
+mostrar_paleta <- function(n, paleta = "ecoa", cinza = FALSE) {
+  cores <- paleta_ecoa(n, paleta = paleta, cinza = cinza)
   df <- data.frame(
     x = factor(1:n),
     y = 1,
@@ -246,7 +343,8 @@ mostrar_paleta <- function(n, cinza = FALSE) {
 #' Util para usar as cores em PowerPoint ou outras aplicacoes.
 #'
 #' @param n Numero de cores desejadas.
-#' @param cinza Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).
+#' @param paleta Nome da paleta (padrao: \code{"ecoa"}).
+#' @param cinza Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).
 #' @param print Se TRUE (padrao), imprime os codigos no console.
 #'
 #' @return Um vetor de caracteres com os codigos hex (invisivelmente).
@@ -255,17 +353,48 @@ mostrar_paleta <- function(n, cinza = FALSE) {
 #' # Obter 5 cores
 #' hex_ecoa(5)
 #'
-#' # Obter 8 cores da paleta com cinzas
-#' hex_ecoa(8, cinza = TRUE)
+#' # Obter 8 cores da paleta completa
+#' hex_ecoa(8, paleta = "completa")
 #'
 #' # Obter 10 cores sem imprimir
 #' cores <- hex_ecoa(10, print = FALSE)
 #'
 #' @export
-hex_ecoa <- function(n, cinza = FALSE, print = TRUE) {
-  cores <- paleta_ecoa(n, cinza = cinza)
+hex_ecoa <- function(n, paleta = "ecoa", cinza = FALSE, print = TRUE) {
+  cores <- paleta_ecoa(n, paleta = paleta, cinza = cinza)
   if (print) {
-    cat(paste0(n, " cores: ", paste(cores, collapse = ", "), "\n"))
+    cat(paste0(n, " cores (", if (cinza) "cinza" else paleta, "): ",
+               paste(cores, collapse = ", "), "\n"))
   }
   invisible(cores)
+}
+
+#' Visualizar todas as paletas Ecoa
+#'
+#' Mostra todas as paletas do pacote em um unico grafico, no estilo de
+#' \code{RColorBrewer::display.brewer.all()}.
+#'
+#' @return Um objeto ggplot.
+#'
+#' @examples
+#' mostrar_paletas()
+#'
+#' @export
+mostrar_paletas <- function() {
+  df <- do.call(rbind, lapply(names(paletas_ecoa), function(nm) {
+    cores <- paletas_ecoa[[nm]]
+    data.frame(paleta = nm, pos = seq_along(cores), cor = cores)
+  }))
+  df$paleta <- factor(df$paleta, levels = rev(names(paletas_ecoa)))
+
+  ggplot2::ggplot(df, ggplot2::aes(x = .data$pos, y = .data$paleta, fill = .data$cor)) +
+    ggplot2::geom_tile(color = "white", linewidth = 1.5, width = 0.95, height = 0.8) +
+    ggplot2::scale_fill_identity() +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      axis.text.y = ggplot2::element_text(size = 11, face = "bold", hjust = 1),
+      plot.title  = ggplot2::element_text(hjust = 0.5, size = 13, face = "bold"),
+      plot.margin = ggplot2::margin(10, 20, 10, 10)
+    ) +
+    ggplot2::labs(title = "Paletas Ecoa")
 }

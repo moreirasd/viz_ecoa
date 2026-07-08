@@ -2,31 +2,37 @@
 % Please edit documentation in R/paletas.R
 \name{paleta_ecoa}
 \alias{paleta_ecoa}
-\title{Funcao de paleta continua Ecoa}
+\title{Funcao de paleta Ecoa}
 \usage{
-paleta_ecoa(n, cinza = FALSE)
+paleta_ecoa(n, paleta = "ecoa", cinza = FALSE)
 }
 \arguments{
-\item{n}{Numero de cores a serem geradas na paleta.}
+\item{n}{Numero de cores a serem geradas.}
 
-\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
+\item{paleta}{Nome da paleta (padrao: \code{"ecoa"}). Veja
+\code{names(paletas_ecoa)}.}
+
+\item{cinza}{Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).}
 }
 \value{
 Um vetor de caracteres com codigos hexadecimais das cores.
 }
 \description{
-Gera n cores interpoladas a partir das cores da Ecoa. Com \code{cinza = TRUE},
-usa a variacao \code{\link{cores_ecoa_cinza}}, que inclui tons de cinza na
-transicao entre o roxo e o laranja -- util para graficos com mais categorias.
+Gera n cores de uma das paletas Ecoa (veja \code{\link{paletas_ecoa}}).
+Paletas do tipo qualitativa (\code{"completa"}) retornam as cores exatas
+enquanto \code{n} nao excede o total disponivel; as demais sao interpoladas
+por \code{colorRampPalette}.
 }
 \examples{
-# Gerar 10 cores
+# Paleta padrao
 paleta_ecoa(10)
 
-# Versao com cinzas, para mais categorias
-paleta_ecoa(10, cinza = TRUE)
+# Outras paletas
+paleta_ecoa(8, paleta = "completa")
+paleta_ecoa(4, paleta = "roxos")
+paleta_ecoa(5, paleta = "azuis")
 
 # Usar em um grafico base
-barplot(1:8, col = paleta_ecoa(8))
+barplot(1:8, col = paleta_ecoa(8, paleta = "laranjas"))
 
 }

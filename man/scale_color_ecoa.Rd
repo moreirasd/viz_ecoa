@@ -4,12 +4,16 @@
 \alias{scale_color_ecoa}
 \title{Escala de cor continua Ecoa para ggplot2}
 \usage{
-scale_color_ecoa(n = 256, cinza = FALSE, ...)
+scale_color_ecoa(n = 256, paleta = "ecoa", cinza = FALSE, ...)
 }
 \arguments{
 \item{n}{Numero de cores para o gradiente (padrao: 256).}
 
-\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
+\item{paleta}{Nome da paleta (padrao: \code{"ecoa"}). Para escalas
+continuas, as sequenciais (\code{"roxos"}, \code{"azuis"}, ...) e a
+\code{"divergente"} sao as mais indicadas.}
+
+\item{cinza}{Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).}
 
 \item{...}{Argumentos adicionais passados para
 \code{\link[ggplot2]{scale_color_gradientn}}.}

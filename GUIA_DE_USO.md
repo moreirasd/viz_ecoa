@@ -116,11 +116,15 @@ scales::label_number(suffix = " Bi", accuracy = 1)   # valores em bilhões
 ### Escalas automáticas
 
 ```r
-scale_color_ecoa_d()             # séries categóricas (linhas, pontos)
-scale_fill_ecoa_d()              # preenchimento categórico (barras)
-scale_fill_ecoa()                # escala contínua (heatmaps)
-scale_fill_ecoa_d(cinza = TRUE)  # muitas categorias: paleta com tons de cinza
+scale_color_ecoa_d()                     # séries categóricas (linhas, pontos)
+scale_fill_ecoa_d()                      # preenchimento categórico (barras)
+scale_fill_ecoa()                        # escala contínua (heatmaps)
+scale_fill_ecoa_d(paleta = "completa")   # muitas categorias (10 cores exatas)
+scale_fill_ecoa(paleta = "roxos")        # sequencial monocromática
+scale_fill_ecoa(paleta = "divergente")   # desvios em torno de um centro
 ```
+
+O pacote traz um conjunto de paletas nomeadas no estilo RColorBrewer (`ecoa`, `cinza`, `completa`, `roxos`, `lilas`, `azuis`, `laranjas`, `frios`, `quentes`, `divergente`). Explore com `mostrar_paletas()` e `paletas_ecoa_info`; detalhes no [README](README.md#conjunto-de-paletas).
 
 ### Atribuição manual (recomendada quando as categorias têm significado)
 

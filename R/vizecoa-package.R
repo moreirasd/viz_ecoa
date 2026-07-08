@@ -7,7 +7,10 @@
 #' \describe{
 #'   \item{\code{\link{cores_ecoa}}}{Vetor com as 4 cores base da Ecoa}
 #'   \item{\code{\link{cores_ecoa_cinza}}}{Variacao com tons de cinza, para mais categorias}
-#'   \item{\code{\link{paleta_ecoa}}}{Funcao para gerar paletas continuas}
+#'   \item{\code{\link{paletas_ecoa}}}{Conjunto de paletas nomeadas (estilo RColorBrewer)}
+#'   \item{\code{\link{paletas_ecoa_info}}}{Tipo e numero de cores de cada paleta}
+#'   \item{\code{\link{paleta_ecoa}}}{Funcao para gerar n cores de qualquer paleta}
+#'   \item{\code{\link{mostrar_paletas}}}{Visualizar todas as paletas}
 #'   \item{\code{\link{scale_fill_ecoa}}}{Escala de preenchimento continua}
 #'   \item{\code{\link{scale_color_ecoa}}}{Escala de cor continua}
 #'   \item{\code{\link{scale_fill_ecoa_d}}}{Escala de preenchimento discreta}

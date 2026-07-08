@@ -4,11 +4,13 @@
 \alias{scale_color_ecoa_d}
 \title{Escala de cor discreta Ecoa para ggplot2}
 \usage{
-scale_color_ecoa_d(cinza = FALSE, ...)
+scale_color_ecoa_d(paleta = "ecoa", cinza = FALSE, ...)
 }
 \arguments{
-\item{cinza}{Se TRUE, usa a paleta com tons de cinza -- recomendado para
-graficos com muitas categorias (padrao: FALSE).}
+\item{paleta}{Nome da paleta (padrao: \code{"ecoa"}). Para muitas
+categorias, use \code{"completa"} ou \code{"cinza"}.}
+
+\item{cinza}{Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).}
 
 \item{...}{Argumentos adicionais passados para
 \code{\link[ggplot2]{discrete_scale}}.}

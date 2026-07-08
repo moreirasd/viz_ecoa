@@ -49,22 +49,61 @@ Para graficos com muitas categorias, ha uma variacao da paleta com tons de cinza
   <img src="man/figures/paleta_cinza.png" width="600">
 </p>
 
+## Conjunto de Paletas
+
+Alem da paleta padrao, o pacote traz um conjunto de paletas nomeadas, no estilo do RColorBrewer. Todas as funcoes aceitam o argumento `paleta = "nome"`:
+
+<p align="center">
+  <img src="man/figures/paletas_todas.png" width="600">
+</p>
+
+| Paleta | Tipo | Cores | Uso indicado |
+|--------|------|:-----:|--------------|
+| `ecoa` | principal | 4 | Padrao: roxos e laranjas |
+| `cinza` | principal | 6 | Padrao com cinzas na transicao, para mais categorias |
+| `completa` | qualitativa | 10 | Muitas categorias: roxos, laranjas, azuis e lilas do tema institucional |
+| `roxos` | sequencial | 5 | Dados ordenados/continuos em tons de roxo |
+| `lilas` | sequencial | 5 | Dados ordenados/continuos em tons de lilas/magenta |
+| `azuis` | sequencial | 5 | Dados ordenados/continuos em tons de azul |
+| `laranjas` | sequencial | 5 | Dados ordenados/continuos em tons de laranja |
+| `frios` | sequencial | 4 | Tons frios (convencao: oferta/total) |
+| `quentes` | sequencial | 4 | Tons quentes (convencao: demanda/destaque) |
+| `divergente` | divergente | 5 | Desvios em torno de um centro (roxo <- neutro -> laranja) |
+
+```r
+# Explorar as paletas
+mostrar_paletas()      # grafico com todas
+paletas_ecoa_info      # tabela com tipo e numero de cores
+paletas_ecoa$azuis     # vetor de cores de uma paleta
+
+# Usar nas escalas
+scale_fill_ecoa_d(paleta = "completa")   # barras com muitas categorias
+scale_fill_ecoa(paleta = "roxos")        # heatmap sequencial
+scale_color_ecoa(paleta = "divergente")  # desvios em torno de um centro
+hex_ecoa(6, paleta = "laranjas")         # hex codes para PPT/Excel
+```
+
+As paletas qualitativas (`completa`) retornam cores exatas ate o limite; as demais sao interpoladas para qualquer `n`.
+
 ## Funcoes Disponiveis
 
-Todas as funcoes aceitam o argumento `cinza = TRUE` para usar a variacao com tons de cinza (padrao: `FALSE`).
+Todas as funcoes de paleta aceitam `paleta = "nome"` (padrao: `"ecoa"`); `cinza = TRUE` segue funcionando como atalho para `paleta = "cinza"`.
 
 | Funcao | Descricao |
 |--------|-----------|
 | `cores_ecoa` | Vetor com as 4 cores base da Ecoa |
 | `cores_ecoa_cinza` | Vetor com as 6 cores da variacao com cinza |
-| `paleta_ecoa(n)` | Gera n cores interpoladas da paleta |
+| `paletas_ecoa` | Lista com todas as paletas nomeadas |
+| `paletas_ecoa_info` | Tabela com tipo e numero de cores de cada paleta |
+| `paleta_ecoa(n, paleta)` | Gera n cores de qualquer paleta |
 | `scale_fill_ecoa()` | Escala de preenchimento continua para ggplot2 |
 | `scale_color_ecoa()` | Escala de cor continua para ggplot2 |
 | `scale_fill_ecoa_d()` | Escala de preenchimento discreta para ggplot2 |
 | `scale_color_ecoa_d()` | Escala de cor discreta para ggplot2 |
 | `theme_ecoa()` | Tema padrao dos graficos Ecoa (ver [Guia de Uso](GUIA_DE_USO.md)) |
-| `mostrar_paleta(n)` | Visualiza n cores da paleta com codigos hex |
-| `hex_ecoa(n)` | Retorna os codigos hex de n cores (util para PPT) |
+| `mostrar_paleta(n, paleta)` | Visualiza n cores de uma paleta com codigos hex |
+| `mostrar_paletas()` | Visualiza todas as paletas em um grafico |
+| `hex_ecoa(n, paleta)` | Retorna os codigos hex de n cores (util para PPT) |
 
 ## Visualizacao da Paleta
 

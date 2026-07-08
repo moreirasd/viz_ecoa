@@ -4,12 +4,14 @@
 \alias{hex_ecoa}
 \title{Obter codigos hex da paleta}
 \usage{
-hex_ecoa(n, cinza = FALSE, print = TRUE)
+hex_ecoa(n, paleta = "ecoa", cinza = FALSE, print = TRUE)
 }
 \arguments{
 \item{n}{Numero de cores desejadas.}
 
-\item{cinza}{Se TRUE, usa a paleta com tons de cinza (padrao: FALSE).}
+\item{paleta}{Nome da paleta (padrao: \code{"ecoa"}).}
+
+\item{cinza}{Se TRUE, atalho para \code{paleta = "cinza"} (padrao: FALSE).}
 
 \item{print}{Se TRUE (padrao), imprime os codigos no console.}
 }
@@ -24,8 +26,8 @@ Util para usar as cores em PowerPoint ou outras aplicacoes.
 # Obter 5 cores
 hex_ecoa(5)
 
-# Obter 8 cores da paleta com cinzas
-hex_ecoa(8, cinza = TRUE)
+# Obter 8 cores da paleta completa
+hex_ecoa(8, paleta = "completa")
 
 # Obter 10 cores sem imprimir
 cores <- hex_ecoa(10, print = FALSE)

@@ -80,6 +80,11 @@ p_bar_cinza <- ggplot(df_bar_cinza, aes(x = categoria, y = valor, fill = categor
 ggsave("man/figures/exemplo_barras_cinza.png", p_bar_cinza, width = 6, height = 4, dpi = 150, bg = "white")
 cat("Imagem salva: man/figures/exemplo_barras_cinza.png\n")
 
+# 3d. Todas as paletas do pacote
+p_todas <- mostrar_paletas()
+ggsave("man/figures/paletas_todas.png", p_todas, width = 8, height = 6, dpi = 150, bg = "white")
+cat("Imagem salva: man/figures/paletas_todas.png\n")
+
 # 4. Exemplo Heatmap
 set.seed(42)
 df_heat <- expand.grid(x = 1:20, y = 1:20)
