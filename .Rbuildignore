@@ -6,5 +6,7 @@
 ^cores_ecoa\.R$
 ^gerar_imagens\.R$
 ^gerar_imagens_guia\.R$
+^gerar_modelo_excel\.R$
 ^GUIA_DE_USO\.md$
+^excel$
 ^man/figures$

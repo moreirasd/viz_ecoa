@@ -13,6 +13,7 @@ Todos os exemplos abaixo usam dados fictícios e podem ser reproduzidos com o sc
 5. [Uso das cores](#5-uso-das-cores)
 6. [Exemplos](#6-exemplos)
 7. [Dicas gerais](#7-dicas-gerais)
+8. [Modelo para Excel](#8-modelo-para-excel)
 
 ---
 
@@ -360,3 +361,22 @@ df_inf |>
 - **Composição de painéis** com `patchwork`: `p1 + p2 + p3 + plot_layout(ncol = 3)` (um tema por painel; título geral com `plot_annotation()`);
 - **Exportação**: `ggsave("figura.png", plot, width = 9, height = 5.5, dpi = 150, bg = "white")` — largura 8–9 para gráficos únicos, altura 5–6.5;
 - **Facetas**: com `facet_wrap()`, adicione `strip.text = element_text(face = "bold")` ao tema.
+
+## 8. Modelo para Excel
+
+O mesmo padrão está disponível para Excel em [`excel/modelo_graficos_ecoa.xlsx`](excel/modelo_graficos_ecoa.xlsx). O arquivo contém **gráficos nativos do Excel** (editáveis) já formatados no padrão Ecoa:
+
+| Aba | Conteúdo |
+|-----|----------|
+| `Leia-me` | Instruções de uso e checklist do padrão |
+| `Cores` | Paleta Ecoa com células pintadas e códigos hex (base, cinza e interpolada) |
+| `Linha` | Série temporal multi-categoria |
+| `Colunas` | Colunas com rótulos de valores em negrito |
+| `Barras` | Barras horizontais ordenadas com categoria em destaque |
+| `Colunas Agrupadas` | Duas séries lado a lado |
+
+**Como usar:** copie o gráfico da aba desejada para o seu arquivo, clique com o botão direito → *Selecionar Dados* e aponte para os seus dados (ou edite a tabela ao lado do gráfico). A fonte (`Fonte: ... Elaboração: Ecoa.`) fica em uma célula abaixo do gráfico, alinhada à esquerda em cinza.
+
+O arquivo é gerado pelo script [`gerar_modelo_excel.R`](gerar_modelo_excel.R) (requer os pacotes `openxlsx2`, `mschart` e `officer`), que também serve de referência para criar novos gráficos no padrão direto do R para o Excel.
+
+Limitações do Excel em relação ao padrão do R: não há subtítulo nativo (use uma caixa de texto ou célula) e anotações como colchetes/faixas precisam ser desenhadas manualmente (Inserir → Formas).
